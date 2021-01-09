@@ -3,14 +3,12 @@ package DAO.Data;
 import Entities.Data;
 import Entities.User;
 
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-@Stateful
+@Stateless
 public class DataClass implements DataInterface {
     @PersistenceContext(unitName = "exampleDS")
     private EntityManagerFactory entityManagerFactory;
@@ -21,6 +19,7 @@ public class DataClass implements DataInterface {
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
         entityManager.close();
+        System.out.println("jkjk");
     }
 
     @Override
@@ -41,7 +40,8 @@ public class DataClass implements DataInterface {
 
     @Override
     public List<Data> findAll(User user) {
-        return entityManager.createNamedQuery(Data.GET_BY_USERNAME,Data.class).setParameter("user",user).getResultList();
+//        return entityManager.createNamedQuery(Data.GET_BY_USERNAME,Data.class).setParameter("user",user).getResultList();
+        return null;
     }
 
 
