@@ -7,4 +7,5 @@ public interface UserInterface {
     User find(User user);
     void remove();
     void update();
+    boolean assertUser(String login,String password);
 }
