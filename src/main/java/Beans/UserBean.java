@@ -8,9 +8,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -53,7 +51,7 @@ public class UserBean {
         } catch (Exception ignored) {
         }
     }
-//  http://localhost:8080/demo/resources/usr/helloworld
+//  http://localhost:8080/demo-1.0-SNAPSHOT/rest/usr/helloworld
     @Path("/helloworld")
     @GET
     public String helloWorld(){

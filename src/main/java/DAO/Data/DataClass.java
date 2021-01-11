@@ -11,14 +11,19 @@ import java.util.List;
 @Stateless
 public class DataClass implements DataInterface {
     @PersistenceContext(unitName = "exampleDS")
-    private EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager=entityManagerFactory.createEntityManager();
     @Override
     public void create(Data entity) {
+        entityManager.getTransaction().begin();
         entityManager.persist(entity);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
     public Data find(Data entity) {
+        entityManager.getTransaction().begin();
         return entityManager.find(Data.class,entity.getId());
     }
 

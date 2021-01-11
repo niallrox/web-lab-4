@@ -10,10 +10,14 @@ import javax.persistence.PersistenceContext;
 @Stateful
 public class UserClass implements UserInterface {
     @PersistenceContext(unitName = "exampleDS")
-    private EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory;
+    private final EntityManager entityManager=entityManagerFactory.createEntityManager();
     @Override
     public void create(User entity) {
+        entityManager.getTransaction().begin();
         entityManager.persist(entity);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
 
     @Override
