@@ -10,19 +10,17 @@ import javax.persistence.PersistenceContext;
 @Stateful
 public class UserClass implements UserInterface {
     @PersistenceContext(unitName = "exampleDS")
-    private EntityManagerFactory entityManagerFactory;
-    private final EntityManager entityManager=entityManagerFactory.createEntityManager();
+    private EntityManager entityManager;
     @Override
     public void create(User entity) {
-        entityManager.getTransaction().begin();
+//        EntityManager entityManager=entityManagerFactory.createEntityManager();
         entityManager.persist(entity);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+
     }
 
     @Override
     public User find(User entity) {
-        entityManager.getTransaction().begin();
+//        EntityManager entityManager=entityManagerFactory.createEntityManager();
         return entityManager.find(User.class,entity.getName());
     }
 
@@ -33,8 +31,10 @@ public class UserClass implements UserInterface {
 
     @Override
     public boolean assertUser(String login, String password) throws NoResultException {
+//        EntityManager entityManager=entityManagerFactory.createEntityManager();
         try {
-            User usr = (User) entityManager.createQuery("from User where name = :name").setParameter("name", login).getSingleResult();
+//            User usr = (User) entityManager.createQuery("from User where name = :name").setParameter("name", login).getSingleResult();
+            User usr = entityManager.find(User.class,login);
             if (!(usr == null)) {
                 return password.hashCode() == usr.getPass();
             }

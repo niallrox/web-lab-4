@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
 import java.util.List;
 
+
 @Stateful
 @Path("/data")
 public class DataBean {
@@ -44,4 +45,5 @@ public class DataBean {
         ((List<Data>) request.getSession().getAttribute("shots")).add(data);
         dataClass.create(data);
     }
+
 }

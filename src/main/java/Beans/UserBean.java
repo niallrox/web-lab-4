@@ -18,26 +18,26 @@ public class UserBean {
     UserInterface userInterface;
     @Path("/signup")
     @POST
-    public void addUser(@FormParam("login") String login, @FormParam("password") String password, @Context HttpServletResponse resp, @Context HttpServletRequest req) {
+    public void addUser(@FormParam("username") String login, @FormParam("password") String password, @Context HttpServletResponse resp, @Context HttpServletRequest req) throws IOException {
         try {
-            User usr = new User(login, password,new ArrayList<Data>());
+            User usr = new User(login, password);
             userInterface.create(usr);
             req.getSession().setAttribute("login", login);
             req.getSession().setAttribute("shots", new ArrayList<Data>());
-            resp.sendRedirect("http://localhost:8080/main.html");
+            resp.sendRedirect("http://localhost:3000");
         } catch (Exception e) {
-            e.printStackTrace();
+            resp.sendError(404,"ХУЕСОСССССООСОСОС");
         }
     }
 
     @Path("/login")
     @POST
-    public void check(@FormParam("login") String login, @FormParam("password") String password, @Context HttpServletResponse resp, @Context HttpServletRequest req) throws IOException {
+    public void check(@FormParam("username") String login, @FormParam("password") String password, @Context HttpServletResponse resp, @Context HttpServletRequest req) throws IOException {
         boolean check = userInterface.assertUser(login, password);
         if (check) {
             req.getSession().setAttribute("login", login);
             req.getSession().setAttribute("shots", new ArrayList<Data>());
-            resp.sendRedirect("http://localhost:3377/laba4-1.0/check.html");
+            resp.sendRedirect("http://localhost:3000");
         } else {
             resp.sendRedirect("http://localhost:3377/laba4-1.0/error_page.html");
         }
@@ -47,7 +47,7 @@ public class UserBean {
     public void logOut(@Context HttpServletRequest req, @Context HttpServletResponse resp) {
         try {
             req.getSession().invalidate();
-            resp.sendRedirect("http://localhost:8080/index.html");
+            resp.sendRedirect("http://localhost:3000/login");
         } catch (Exception ignored) {
         }
     }
