@@ -3,9 +3,15 @@ package BusinessLayer.Manager;
 import BusinessLayer.Entities.Data;
 
 import javax.ejb.Singleton;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
 
 @Singleton
 public class Controller {
+    private final SimpleDateFormat sOut = new SimpleDateFormat("hh:mm:ss");
+    private final SimpleDateFormat sIn = new SimpleDateFormat("h:m:s");
 
     public boolean checkXYR(double x, double y, double r) {
         //triangle
@@ -22,12 +28,23 @@ public class Controller {
         } else return false;
         //hate simplifies
     }
-    public Data parseData(String x, String y, String z){
+
+    public Data parseData(String x, String y, String z) {
         double xData = Double.parseDouble(x);
         double yData = Double.parseDouble(y);
         double zData = Double.parseDouble(z);
-        Data data = new Data(xData,yData,zData);
-        data.setResult(checkXYR(xData,yData,zData));
+        Data data = new Data(xData, yData, zData);
+        data.setResult(checkXYR(xData, yData, zData));
         return data;
+    }
+
+    public String timeFormat(LocalTime time) {
+        Date date = null;
+        try {
+            date = sIn.parse(String.valueOf(time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sOut.format(date);
     }
 }
