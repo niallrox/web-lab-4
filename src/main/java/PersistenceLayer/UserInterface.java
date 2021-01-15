@@ -1,6 +1,6 @@
-package DAO.User;
+package PersistenceLayer;
 
-import Entities.User;
+import BuisnessLayer.Entities.User;
 
 public interface UserInterface {
     void create(User user);

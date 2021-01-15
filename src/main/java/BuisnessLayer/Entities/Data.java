@@ -1,7 +1,6 @@
-package Entities;
+package BuisnessLayer.Entities;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 
 @Table(name="data")
@@ -14,8 +13,7 @@ public class Data {
     private Double X = 0d;
     private Double Y;
     private Double R = 1d;
-    private String result;
-    private String time;
+    private boolean result;
 
 
     public Long getId() {
@@ -28,8 +26,7 @@ public class Data {
         this.R=r;
     }
 
-    public String getResult() {return result;}
-    public String getTime() {return time;}
+    public boolean getResult() {return result;}
     public Double getX() {return X;}
     public Double getY() {return Y;}
     public Double getR() {return R;}
@@ -43,11 +40,8 @@ public class Data {
     public void setX(Double x) {X = x;}
     public void setY(Double y) {Y = y;}
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
-    public void setResult(String result) {
+    public void setResult(boolean result) {
         this.result = result;
     }
 
@@ -58,8 +52,6 @@ public class Data {
                 ", Y='" + Y + '\'' +
                 ", R=" + R +
                 ", result='" + result + '\'' +
-                ", time='" + time + '\'' +
-                ", session='" + '\'' +
                 '}';
     }
 }
