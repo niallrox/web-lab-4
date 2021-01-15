@@ -70,7 +70,7 @@ public class WebService {
             Data data = controller.parseData(x, y, r);
             user.addToPoints(data);
             userInterface.update(user);
-            return Response.ok(user.getPoints().toString()).build();
+            return Response.ok(data.toString()).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
@@ -94,7 +94,7 @@ public class WebService {
         if (user != null) {
             user.clearPoints();
             userInterface.update(user);
-            return Response.ok(user.getPoints().toString()).build();
+            return Response.ok().build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
