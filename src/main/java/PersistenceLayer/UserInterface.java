@@ -1,11 +1,11 @@
 package PersistenceLayer;
 
-import BuisnessLayer.Entities.User;
+import BusinessLayer.Entities.User;
 
 public interface UserInterface {
     void create(User user);
-    User find(User user);
+    User find(String name);
     void remove();
-    void update();
-    boolean assertUser(String login,String password);
+    void update(User user);
+    boolean checkUser(String login,String password);
 }

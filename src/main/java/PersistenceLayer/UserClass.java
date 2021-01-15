@@ -1,6 +1,6 @@
 package PersistenceLayer;
 
-import BuisnessLayer.Entities.User;
+import BusinessLayer.Entities.User;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
@@ -18,8 +18,8 @@ public class UserClass implements UserInterface {
     }
 
     @Override
-    public User find(User entity) {
-        return entityManager.find(User.class, entity.getName());
+    public User find(String name) {
+        return entityManager.find(User.class, name);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class UserClass implements UserInterface {
     }
 
     @Override
-    public boolean assertUser(String login, String password) throws NoResultException {
+    public boolean checkUser(String login, String password) throws NoResultException {
         try {
             User usr = entityManager.find(User.class, login);
             if (!(usr == null)) {
@@ -41,7 +41,7 @@ public class UserClass implements UserInterface {
     }
 
     @Override
-    public void update() {
-        //
+    public void update(User user) {
+        entityManager.merge(user);
     }
 }
