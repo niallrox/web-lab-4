@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
@@ -62,6 +63,7 @@ public class WebService {
         return "Hello World";
     }
 
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/addPoint")
     @POST
     public Response addPoint(@FormParam("name") String username, @FormParam("x") String x, @FormParam("y") String y, @FormParam("r") String r) {
@@ -70,18 +72,18 @@ public class WebService {
             Data data = controller.parseData(x, y, r);
             user.addToPoints(data);
             userInterface.update(user);
-            return Response.ok(data.toString()).build();
+            return Response.ok(data).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
-
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/getPoints")
     @POST
     public Response getPoints(@FormParam("name") String username) {
         User user = userInterface.find(username);
         if (user != null) {
-            return Response.ok(user.getPoints().toString()).build();
+            return Response.ok(user.getPoints()).build();
         } else {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
