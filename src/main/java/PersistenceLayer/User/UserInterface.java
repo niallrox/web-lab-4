@@ -1,6 +1,6 @@
-package PersistenceLayer;
+package PersistenceLayer.User;
 
-import BusinessLayer.Entities.User;
+import BusinessLayer.Entities.User.User;
 
 public interface UserInterface {
     void create(User user);

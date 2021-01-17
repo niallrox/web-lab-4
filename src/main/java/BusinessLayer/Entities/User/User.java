@@ -1,4 +1,7 @@
-package BusinessLayer.Entities;
+package BusinessLayer.Entities.User;
+
+import BusinessLayer.Entities.Data.Data;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,14 +13,13 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     private String name;
-    private int pass;
+    private String pass;
 
     @OneToMany(fetch = FetchType.EAGER ,
             cascade = CascadeType.ALL)
     private List<Data> points = new ArrayList<>();
 
     public void addToPoints(Data data) {
-        data.setUser(this);
         this.points.add(data);
     }
     public void clearPoints() {
@@ -29,7 +31,7 @@ public class User implements Serializable {
 
     public User(String name, String pass) {
         this.name = name;
-        this.pass = pass.hashCode();
+        this.pass = DigestUtils.md5Hex(name+pass);
     }
 
     public List<Data> getPoints() {
@@ -44,7 +46,7 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public void setPass(int pass) {
+    public void setPass(String pass) {
         this.pass = pass;
     }
 
@@ -53,7 +55,7 @@ public class User implements Serializable {
         return name;
     }
 
-    public int getPass() {
+    public String getPass() {
         return pass;
     }
 

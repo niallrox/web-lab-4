@@ -1,6 +1,6 @@
 package BusinessLayer.Manager;
 
-import BusinessLayer.Entities.Data;
+import BusinessLayer.Entities.Data.Data;
 
 import javax.ejb.Singleton;
 import java.text.ParseException;

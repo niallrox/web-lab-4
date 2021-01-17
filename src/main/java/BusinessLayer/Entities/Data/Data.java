@@ -1,4 +1,4 @@
-package BusinessLayer.Entities;
+package BusinessLayer.Entities.Data;
 
 import javax.persistence.*;
 
@@ -14,8 +14,6 @@ public class Data {
     private Double Y;
     private Double R = 1d;
     private boolean result;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private User user;
 
 
     public Long getId() {
@@ -28,10 +26,6 @@ public class Data {
         this.R=r;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public boolean getResult() {return result;}
     public Double getX() {return X;}
     public Double getY() {return Y;}
@@ -42,9 +36,6 @@ public class Data {
         this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public void setR(Double r) {R = r;}
     public void setX(Double x) {X = x;}
