@@ -29,10 +29,10 @@ public class Controller {
         //hate simplifies
     }
 
-    public Data parseData(String x, String y, String z) {
-        double xData = Double.parseDouble(x);
-        double yData = Double.parseDouble(y);
-        double zData = Double.parseDouble(z);
+    public Data parseData(Double x, Double y, Double z) {
+        double xData = x;
+        double yData = y;
+        double zData = z;
         Data data = new Data(xData, yData, zData);
         data.setResult(checkXYR(xData, yData, zData));
         return data;
