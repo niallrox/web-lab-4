@@ -3,16 +3,17 @@ package BusinessLayer.Entities.Data;
 import javax.persistence.*;
 
 
-@Table(name="data")
+@Table(name="points")
 @Entity
 public class Data {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator = "POINT_SEQ")
+    @SequenceGenerator(name = "POINT_SEQ",sequenceName = "idsgsequence", allocationSize = 1)
     private Long id;
 
-    private Double X = 0d;
+    private Double X;
     private Double Y;
-    private Double R = 1d;
+    private Double R;
     private boolean result;
 
 

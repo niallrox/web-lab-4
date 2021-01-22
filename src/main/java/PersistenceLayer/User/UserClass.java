@@ -5,12 +5,13 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 @Singleton
 public class UserClass implements UserInterface {
-    @PersistenceContext(unitName = "exampleDS")
+    @PersistenceContext(unitName = "jjDS")
     private EntityManager entityManager;
 
     @Override
@@ -33,7 +34,7 @@ public class UserClass implements UserInterface {
         try {
             User usr = entityManager.find(User.class, login);
             if (!(usr == null)) {
-                return DigestUtils.md5Hex(login+password).equals(usr.getPass());
+                return DigestUtils.md5Hex(login + password).equals(usr.getPass());
             }
             return false;
         } catch (NoResultException e) {

@@ -13,7 +13,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/data")
+@Path("/points")
 public class WebServiceData {
     @EJB
     UserInterface userInterface;
@@ -22,14 +22,13 @@ public class WebServiceData {
     @EJB
     TokenInterface tokenInterface;
 
-    @NeededLogin
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/addPoint")
     @POST
+    @NeededLogin
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response addPoint(@HeaderParam("Authorization") String authorization, DataDto dataDto) {
         try {
-            User user = userInterface.find(tokenInterface.find(authorization).getName());
+            User user = userInterface.find(tokenInterface.find(authorization.substring(1,authorization.length()-1)).getName());
             Data data = controller.parseData(dataDto.getX(), dataDto.getY(), dataDto.getR());
             user.addToPoints(data);
             userInterface.update(user);
@@ -38,25 +37,21 @@ public class WebServiceData {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
-
+    @GET
     @NeededLogin
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/getPoints")
-    @GET
     public Response getPoints(@HeaderParam("Authorization") String authorization) {
         try {
-            User user = userInterface.find(tokenInterface.find(authorization).getName());
+            User user = userInterface.find(tokenInterface.find(authorization.substring(1,authorization.length()-1)).getName());
             return Response.ok(user.getPoints()).build();
         } catch (Exception exception) {
             return Response.status(Response.Status.BAD_REQUEST).build();
         }
     }
-
     @NeededLogin
-    @Path("/clear")
     @DELETE
     public Response clearPoints(@HeaderParam("Authorization") String authorization) {
-        UserToken usr = tokenInterface.find(authorization);
+        UserToken usr = tokenInterface.find(authorization.substring(1,authorization.length()-1));
         if (usr != null) {
             User user = userInterface.find(usr.getName());
             user.clearPoints();

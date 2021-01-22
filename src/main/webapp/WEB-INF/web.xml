@@ -9,7 +9,7 @@
             com.sun.jersey.spi.container.servlet.ServletContainer
         </servlet-class>
         <init-param>
-            <param-name>jersey.config.server.provider.packages</param-name>
+            <param-name>jersey.config.server.providers.packages</param-name>
             <param-value>WebLayer</param-value>
         </init-param>
         <init-param>
@@ -39,7 +39,7 @@
         </init-param>
         <init-param>
             <param-name>cors.supportedMethods</param-name>
-            <param-value>GET, HEAD, POST, OPTIONS</param-value>
+            <param-value>GET, HEAD, POST, OPTIONS, DELETE</param-value>
         </init-param>
         <init-param>
             <param-name>cors.supportedHeaders</param-name>

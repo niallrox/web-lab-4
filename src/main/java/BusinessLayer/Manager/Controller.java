@@ -30,6 +30,10 @@ public class Controller {
     }
 
     public Data parseData(Double x, Double y, Double z) {
+        if (z == 0) {
+            x = 0.0;
+            y = 0.0;
+        }
         Data data = new Data(x, y, z);
         data.setResult(checkXYR(x, y, z));
         return data;
